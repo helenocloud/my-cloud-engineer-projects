@@ -1,2 +1,2 @@
-# my-cloud-engineer-projects
-my-cloud-engineer-projects
+Automating AWS with Terraform
+We are using git branches to track changes
