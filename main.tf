@@ -1,6 +1,9 @@
 locals {
   private_cidr = ["10.0.2.0/24","10.0.3.0/24"] 
   public_cidr  = ["10.0.0.0/24","10.0.1.0/24"]
+  data "aws_availability_zones" "available" {
+    state = "available"
+  }
 }
 
 
@@ -16,8 +19,10 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "public" {
   count = length(local.public_cidr)
 
-  vpc_id     = aws_vpc.main.id
-  cidr_block = local.public_cidr[count.index]
+  vpc_id           = aws_vpc.main.id
+  cidr_block       = local.public_cidr[count.index]
+  availabilty_zone = 
+data.aws_availability_zones.available.names[count.index]
 
   tags = {
     Name = "public${count.index}"
@@ -31,6 +36,9 @@ resource "aws_subnet" "private" {
 
   vpc_id     = aws_vpc.main.id
   cidr_block = local.private_cidr[count.index]
+  availabilty_zone = 
+data.aws_availability_zones.available.names[count.index]
+
 
   tags = {
     Name = "private${count.index}"
