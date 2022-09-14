@@ -1,5 +1,5 @@
 output "vpc_id" {
-  value = aws_vpc.main.id  
+  value = aws_vpc.main.id
 }
 
 output "public_subnet_id" {
@@ -11,5 +11,5 @@ output "private_subnet_id" {
 }
 
 output "vpc_cidr" {
-  value = var.vpc_cidr  
+  value = var.vpc_cidr
 }
