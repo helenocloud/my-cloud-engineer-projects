@@ -51,12 +51,20 @@ resource "aws_lb_target_group" "main" {
     interval            = 30
     matcher             = 200
   }
+
+  tags = {
+    Name = var.env_code
+  }
 }
 
 resource "aws_lb_target_group_attachment" "main" {
   target_group_arn = aws_lb_target_group.main.arn
   target_id        = aws_instance.private.id
   port             = 80
+
+  tags = {
+    Name = var.env_code
+  }
 }
 
 resource "aws_lb_listener" "main" {
@@ -67,5 +75,9 @@ resource "aws_lb_listener" "main" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.main.arn
+  }
+
+  tags = {
+    Name = var.env_code
   }
 }
