@@ -1,32 +1,32 @@
 resource "aws_iam_policy" "main" {
   name        = var.env_code
   description = var.env_code
-  policy      = <<EOF  
+  policy      = <<EOF
 {
    "Version": "2012-10-17",
       "Statement": [
         {
-            "Effect": "Allow"
+            "Effect": "Allow",
             "Action": "s3:*",
             "Resource": "*"
         }
     ]
-} 
+}
 EOF
 }
 
 resource "aws_iam_role" "main" {
   name               = var.env_code
   assume_role_policy = <<EOF
-{   
-    "Version" = "2012-10-17"
+{
+    "Version": "2012-10-17",
     "Statement": [
-        {   
+        {
             "Action": "sts:AssumeRole",
             "Principal": {
-            "Service": "ec2.amazonaws.com"
+                "Service": "ec2.amazonaws.com"
             },
-            "Effect": "Allow"
+            "Effect": "Allow",
             "Sid": ""
         }
     ]
